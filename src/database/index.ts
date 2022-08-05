@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
-mongoose.connect('mongodb://0.0.0.0:27018/discord_dashboard')
+const DB = process.env.MONGODB_URI;
+
+mongoose.connect(`${DB}`)
     .then(() => console.log("Connected to Database"))
     .catch((err) => console.log(err));
