@@ -18,6 +18,8 @@ export function createApp(): Express {
     //Enable CORS
     app.use(cors({ origin: '*'})); //['http://localhost:3000'] , credentials: true}));
 
+    const DB = process.env.MONGODB_URI;
+
     app.use(session({
         secret: 'ENHsnfiJSFMKn4439291u7NJEfknwioh87',
         resave: false,
@@ -26,7 +28,7 @@ export function createApp(): Express {
             maxAge: 60000 * 60 * 24 * 7,
         },
         store: store.create({
-            mongoUrl: 'mongodb://0.0.0.0:27018/discord_dashboard',
+            mongoUrl: `${DB}`,
         }),
     }));
 
