@@ -27,6 +27,7 @@ export function createApp(): Express {
         cookie: {
             maxAge: 60000 * 60 * 24 * 7,
             secure: false,
+            domain: 'jasn.site'
         },
         store: store.create({
             mongoUrl: `${DB}`,
