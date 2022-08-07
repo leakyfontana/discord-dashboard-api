@@ -16,7 +16,7 @@ export function createApp(): Express {
     app.use(express.urlencoded({ extended: true }));
 
     //Enable CORS
-    app.use(cors({ origin: '*'})); //['http://localhost:3000'] , credentials: true}));
+    app.use(cors({ origin: '*', credentials: true})); //['http://localhost:3000'] , credentials: true}));
 
     const DB = process.env.MONGODB_URI;
 
@@ -26,6 +26,7 @@ export function createApp(): Express {
         saveUninitialized: true,
         cookie: {
             maxAge: 60000 * 60 * 24 * 7,
+            secure: false,
         },
         store: store.create({
             mongoUrl: `${DB}`,
@@ -36,7 +37,7 @@ export function createApp(): Express {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.use((req, res, next) => setTimeout(() => next(), 1200));
+    app.use((req, res, next) => setTimeout(() => next(), 1000));
 
     app.use('/api', routes);
     return app;
